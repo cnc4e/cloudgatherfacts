@@ -1,0 +1,11 @@
+database:
+  url: sqlite:///Data/test.db
+diff:
+  outputfile: deepdiff.json
+  deepdiff:
+    # group_by: SubnetId
+    ignore_order: true
+    verbose_level: 1
+    exclude_paths:
+      - root['NetworkInterfaces']
+      - root['NetworkAcls']

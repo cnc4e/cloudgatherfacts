@@ -1,0 +1,66 @@
+cloudtype: AWS
+outputdir: Data
+outputfile: AWS.json
+database:
+  url: sqlite:///Data/test.db
+resources:
+  - type: Vpcs
+  - type: Subnets
+  - type: SecurityGroups
+  - type: Reservations
+  - type: Volumes
+  - type: NetworkInterfaces
+  - type: RouteTables
+  - type: NetworkAcls
+  - type: InternetGateways
+  - type: Addresses
+  - type: NatGateways
+  - type: DhcpOptions
+  - type: LoadBalancers
+  - type: TargetGroups
+  - type: Users
+    parameters:
+      PathPrefix: /
+  - type: Roles
+    parameters:
+      MaxItems: 1000
+  - type: Groups
+    parameters:
+      PathPrefix: /
+  - type: Policies
+    parameters:
+      Scope: Local
+      OnlyAttached: True
+      PolicyUsageFilter: PermissionsPolicy
+      MaxItems: 1000
+  - type: Keys
+  - type: Buckets
+    options:
+      HasDetail: True
+      HasObject: True
+      TagFilters: 
+        - Key: Environment
+          Values:
+            - production
+            - development
+  - type: Topics
+  - type: Trails
+  - type: MetricAlarms
+  - type: HostedZones
+  - type: FileSystems
+  - type: Functions
+  - type: EventRules
+  - type: Backups
+  - type: DirectConnectGateways
+  - type: LogGroups
+  - type: MetricFilters
+  - type: DBInstances
+  - type: DBProxies
+  - type: EventSubscriptions
+awsconfig:
+  - name: Apis
+    query: >-
+      SELECT
+        resourceId, configuration
+      WHERE 
+        resourceType = 'AWS::ApiGateway::RestApi'
